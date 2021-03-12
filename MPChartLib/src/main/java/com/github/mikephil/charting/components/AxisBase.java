@@ -248,7 +248,7 @@ public abstract class AxisBase extends ComponentBase {
     /**
      * Sets the color of the grid lines for this axis (the horizontal lines
      * coming from each label).
-     *
+     * 设置该轴的网格线的颜色（水平线来自每个标签）。
      * @param color
      */
     public void setGridColor(int color) {
@@ -361,7 +361,7 @@ public abstract class AxisBase extends ComponentBase {
      * sets the number of label entries for the y-axis max = 25, min = 2, default: 6, be aware
      * that this number is not
      * fixed (if force == false) and can only be approximated.
-     *
+     * 设置y轴的标签条目数max = 25，min = 2，默认值：6，请注意该数字不是固定的（如果force == false），只能近似。
      * @param count the number of y-axis labels that should be displayed
      * @param force if enabled, the set label count will be forced, meaning that the exact
      *              specified count of labels will

@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 
 import com.github.mikephil.charting.animation.ChartAnimator;
@@ -38,6 +39,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
         mHighlightPaint.setStrokeWidth(2f);
         mHighlightPaint.setColor(Color.rgb(255, 187, 115));
 
+
         mWebPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mWebPaint.setStyle(Paint.Style.STROKE);
 
@@ -62,7 +64,6 @@ public class RadarChartRenderer extends LineRadarRenderer {
         int mostEntries = radarData.getMaxEntryCountSet().getEntryCount();
 
         for (IRadarDataSet set : radarData.getDataSets()) {
-
             if (set.isVisible()) {
                 drawDataSet(c, set, mostEntries);
             }
@@ -70,6 +71,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
     }
 
     protected Path mDrawDataSetSurfacePathBuffer = new Path();
+
     /**
      * Draws the RadarDataSet
      *
@@ -89,7 +91,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
         float factor = mChart.getFactor();
 
         MPPointF center = mChart.getCenterOffsets();
-        MPPointF pOut = MPPointF.getInstance(0,0);
+        MPPointF pOut = MPPointF.getInstance(0, 0);
         Path surface = mDrawDataSetSurfacePathBuffer;
         surface.reset();
 
@@ -127,10 +129,8 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
             final Drawable drawable = dataSet.getFillDrawable();
             if (drawable != null) {
-
                 drawFilledPath(c, surface, drawable);
             } else {
-
                 drawFilledPath(c, surface, dataSet.getFillColor(), dataSet.getFillAlpha());
             }
         }
@@ -159,8 +159,8 @@ public class RadarChartRenderer extends LineRadarRenderer {
         float factor = mChart.getFactor();
 
         MPPointF center = mChart.getCenterOffsets();
-        MPPointF pOut = MPPointF.getInstance(0,0);
-        MPPointF pIcon = MPPointF.getInstance(0,0);
+        MPPointF pOut = MPPointF.getInstance(0, 0);
+        MPPointF pIcon = MPPointF.getInstance(0, 0);
 
         float yoffset = Utils.convertDpToPixel(5f);
 
@@ -182,11 +182,11 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
                 RadarEntry entry = dataSet.getEntryForIndex(j);
 
-                 Utils.getPosition(
-                         center,
-                         (entry.getY() - mChart.getYChartMin()) * factor * phaseY,
-                         sliceangle * j * phaseX + mChart.getRotationAngle(),
-                         pOut);
+                Utils.getPosition(
+                        center,
+                        (entry.getY() - mChart.getYChartMin()) * factor * phaseY,
+                        sliceangle * j * phaseX + mChart.getRotationAngle(),
+                        pOut);
 
                 if (dataSet.isDrawValuesEnabled()) {
                     drawValue(c,
@@ -216,8 +216,8 @@ public class RadarChartRenderer extends LineRadarRenderer {
                     Utils.drawImage(
                             c,
                             icon,
-                            (int)pIcon.x,
-                            (int)pIcon.y,
+                            (int) pIcon.x,
+                            (int) pIcon.y,
                             icon.getIntrinsicWidth(),
                             icon.getIntrinsicHeight());
                 }
@@ -236,11 +236,15 @@ public class RadarChartRenderer extends LineRadarRenderer {
         drawWeb(c);
     }
 
+
+    protected Path mDrawWebBg = new Path();
+
     protected void drawWeb(Canvas c) {
 
         float sliceangle = mChart.getSliceAngle();
 
         // calculate the factor that is needed for transforming the value to
+        // 计算将值转换为
         // pixels
         float factor = mChart.getFactor();
         float rotationangle = mChart.getRotationAngle();
@@ -248,14 +252,20 @@ public class RadarChartRenderer extends LineRadarRenderer {
         MPPointF center = mChart.getCenterOffsets();
 
         // draw the web lines that come from the center
+        // 画出中心的网线
         mWebPaint.setStrokeWidth(mChart.getWebLineWidth());
         mWebPaint.setColor(mChart.getWebColor());
         mWebPaint.setAlpha(mChart.getWebAlpha());
 
+        Path surface = mDrawWebBg;
+        surface.reset();
+
         final int xIncrements = 1 + mChart.getSkipWebLineCount();
         int maxEntryCount = mChart.getData().getMaxEntryCountSet().getEntryCount();
 
-        MPPointF p = MPPointF.getInstance(0,0);
+        boolean hasMovedToPoint = false;
+
+        MPPointF p = MPPointF.getInstance(0, 0);
         for (int i = 0; i < maxEntryCount; i += xIncrements) {
 
             Utils.getPosition(
@@ -265,7 +275,17 @@ public class RadarChartRenderer extends LineRadarRenderer {
                     p);
 
             c.drawLine(center.x, center.y, p.x, p.y, mWebPaint);
+
+            if (!hasMovedToPoint) {
+                surface.moveTo(p.x, p.y);
+                hasMovedToPoint = true;
+            } else{
+                surface.lineTo(p.x, p.y);
+            }
+
         }
+        drawFilledPath(c, surface, Color.rgb(255, 189, 0), 180);
+        surface.close();
         MPPointF.recycleInstance(p);
 
         // draw the inner-web
@@ -275,8 +295,9 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         int labelCount = mChart.getYAxis().mEntryCount;
 
-        MPPointF p1out = MPPointF.getInstance(0,0);
-        MPPointF p2out = MPPointF.getInstance(0,0);
+        MPPointF p1out = MPPointF.getInstance(0, 0);
+        MPPointF p2out = MPPointF.getInstance(0, 0);
+
         for (int j = 0; j < labelCount; j++) {
 
             for (int i = 0; i < mChart.getData().getEntryCount(); i++) {
@@ -287,12 +308,13 @@ public class RadarChartRenderer extends LineRadarRenderer {
                 Utils.getPosition(center, r, sliceangle * (i + 1) + rotationangle, p2out);
 
                 c.drawLine(p1out.x, p1out.y, p2out.x, p2out.y, mWebPaint);
-
-
             }
+
         }
+
         MPPointF.recycleInstance(p1out);
         MPPointF.recycleInstance(p2out);
+
     }
 
     @Override
@@ -305,7 +327,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
         float factor = mChart.getFactor();
 
         MPPointF center = mChart.getCenterOffsets();
-        MPPointF pOut = MPPointF.getInstance(0,0);
+        MPPointF pOut = MPPointF.getInstance(0, 0);
 
         RadarData radarData = mChart.getData();
 
@@ -362,6 +384,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
     }
 
     protected Path mDrawHighlightCirclePathBuffer = new Path();
+
     public void drawHighlightCircle(Canvas c,
                                     MPPointF point,
                                     float innerRadius,

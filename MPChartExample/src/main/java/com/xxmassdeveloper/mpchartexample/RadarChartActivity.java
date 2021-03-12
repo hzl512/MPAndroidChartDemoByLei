@@ -5,6 +5,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
@@ -50,13 +52,16 @@ public class RadarChartActivity extends DemoBase {
 
         chart.getDescription().setEnabled(false);
 
+//        Paint p1 = chart.getRenderer().getPaintRender();
+//        p1.setColor(Color.BLUE);
+
 //        chart.setSkipWebLineCount(5);
 
         chart.setWebLineWidth(0.01f);
         chart.setWebColor(Color.LTGRAY);
 
         chart.setWebLineWidthInner(2f);
-        chart.setWebColorInner(Color.LTGRAY);
+        chart.setWebColorInner(Color.WHITE);
         chart.setWebAlpha(100);
 
         // create a custom MarkerView (extend MarkerView) and specify the layout
@@ -84,11 +89,9 @@ public class RadarChartActivity extends DemoBase {
                 return mActivities[(int) value % mActivities.length];
             }
         });
-        xAxis.setTextColor(Color.WHITE);
 
         YAxis yAxis = chart.getYAxis();
         yAxis.setTypeface(tfLight);
-        //
         yAxis.setLabelCount(4, false);
         yAxis.setTextSize(9f);
         yAxis.setAxisMinimum(0f);
@@ -103,7 +106,7 @@ public class RadarChartActivity extends DemoBase {
         l.setTypeface(tfLight);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(5f);
-        l.setTextColor(Color.BLACK);
+        l.setTextColor(Color.parseColor("#9B9B9B"));
     }
 
     private void setData() {
@@ -148,6 +151,7 @@ public class RadarChartActivity extends DemoBase {
         sets.add(set2);
 
         RadarData data = new RadarData(sets);
+        data.setHighlightEnabled(true);
         data.setValueTypeface(tfLight);
         data.setValueTextSize(8f);
         data.setDrawValues(false);

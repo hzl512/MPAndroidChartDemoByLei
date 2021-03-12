@@ -53,6 +53,7 @@ public class CandleStickChartRenderer extends LineScatterCandleRadarRenderer {
         }
     }
 
+
     @SuppressWarnings("ResourceAsColor")
     protected void drawDataSet(Canvas c, ICandleDataSet dataSet) {
 

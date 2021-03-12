@@ -533,7 +533,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
 
     /**
      * Sets the last highlighted value for the touchlistener.
-     *
+     * 设置触摸监听器的最后高亮显示的值。
      * @param highs
      */
     protected void setLastHighlighted(Highlight[] highs) {
@@ -667,6 +667,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
 
     /**
      * Highlights the values represented by the provided Highlight object
+     * 高亮显示由提供的Highlight对象表示的值
      * This method *will not* call the listener.
      *
      * @param highlight contains information about which entry should be highlighted
@@ -1377,6 +1378,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
 
     /**
      * set a new paint object for the specified parameter in the chart e.g.
+     * 为图表中的指定参数设置一个新的绘画对象，例如
      * Chart.PAINT_VALUES
      *
      * @param p     the new paint object
@@ -1464,6 +1466,7 @@ public abstract class Chart<T extends ChartData<? extends IDataSet<? extends Ent
 
     /**
      * Returns the Renderer object the chart uses for drawing data.
+     * 返回图表用于图形数据的Renderer对象。
      *
      * @return
      */

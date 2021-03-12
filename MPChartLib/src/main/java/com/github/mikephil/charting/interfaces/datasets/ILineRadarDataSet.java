@@ -51,6 +51,9 @@ public interface ILineRadarDataSet<T extends Entry> extends ILineScatterCandleRa
      * uses the canvas.clipPath(...) method for drawing the filled area.
      * For devices with API level < 18 (Android 4.3), hardware acceleration of the chart should
      * be turned off. Default: false
+     * 如果将DataSet绘制为实心（曲面），而不仅仅是将绘制为直线，则将其设置为true，禁用此选项将极大地提高性能。
+     * 请注意，此方法使用canvas.clipPath（...）方法绘制填充区域。
+     * *对于API级别<18（Android 4.3）的设备，应关闭图表的硬件加速。默认值：false
      *
      * @param enabled
      */

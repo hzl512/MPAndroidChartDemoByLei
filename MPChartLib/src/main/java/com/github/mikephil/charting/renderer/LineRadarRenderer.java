@@ -20,7 +20,7 @@ public abstract class LineRadarRenderer extends LineScatterCandleRadarRenderer {
 
     /**
      * Draws the provided path in filled mode with the provided drawable.
-     *
+     * 使用提供的可绘制对象以填充模式绘制提供的路径。
      * @param c
      * @param filledPath
      * @param drawable
@@ -47,6 +47,7 @@ public abstract class LineRadarRenderer extends LineScatterCandleRadarRenderer {
 
     /**
      * Draws the provided path in filled mode with the provided color and alpha.
+     * 在填充模式下使用提供的颜色和Alpha绘制提供的路径。
      * Special thanks to Angelo Suzuki (https://github.com/tinsukE) for this.
      *
      * @param c
@@ -89,7 +90,7 @@ public abstract class LineRadarRenderer extends LineScatterCandleRadarRenderer {
      *
      * @return
      */
-    private boolean clipPathSupported() {
+    protected boolean clipPathSupported() {
         return Utils.getSDKInt() >= 18;
     }
 }

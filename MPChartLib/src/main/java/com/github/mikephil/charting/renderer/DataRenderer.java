@@ -95,7 +95,7 @@ public abstract class DataRenderer extends Renderer {
 
     /**
      * Returns the Paint object used for rendering.
-     *
+     * 返回用于渲染的Paint对象。
      * @return
      */
     public Paint getPaintRender() {
@@ -137,7 +137,7 @@ public abstract class DataRenderer extends Renderer {
 
     /**
      * Draws the value of the given entry by using the provided IValueFormatter.
-     *
+     * 使用提供的IValueFormatter绘制给定条目的值。
      * @param c            canvas
      * @param formatter    formatter for custom value-formatting
      * @param value        the value to be drawn

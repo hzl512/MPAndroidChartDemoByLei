@@ -51,6 +51,7 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
 
     /**
      * flag indicating if the web lines should be drawn or not
+     * 指示是否应绘制Web线的标志
      */
     private boolean mDrawWeb = true;
 
@@ -135,12 +136,14 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
 
         mXAxisRenderer.renderAxisLabels(canvas);
 
+        //1、画静态网
         if (mDrawWeb)
             mRenderer.drawExtras(canvas);
 
         if (mYAxis.isEnabled() && mYAxis.isDrawLimitLinesBehindDataEnabled())
             mYAxisRenderer.renderLimitLines(canvas);
 
+        //2、画动态网
         mRenderer.drawData(canvas);
 
         if (valuesToHighlight())
