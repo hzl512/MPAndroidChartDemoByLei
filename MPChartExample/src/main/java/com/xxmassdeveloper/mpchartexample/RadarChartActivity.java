@@ -89,10 +89,10 @@ public class RadarChartActivity extends DemoBase {
         YAxis yAxis = chart.getYAxis();
         yAxis.setTypeface(tfLight);
         //
-        yAxis.setLabelCount(5, false);
+        yAxis.setLabelCount(4, false);
         yAxis.setTextSize(9f);
         yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(80f);
+        yAxis.setAxisMaximum(60f);
         yAxis.setDrawLabels(false);
 
         Legend l = chart.getLegend();
@@ -108,7 +108,7 @@ public class RadarChartActivity extends DemoBase {
 
     private void setData() {
 
-        float mul = 80;
+        float mul = 60;
         float min = 20;
         int cnt = 6;
 
@@ -129,16 +129,16 @@ public class RadarChartActivity extends DemoBase {
         set1.setColor(0x80007B55);
         set1.setFillColor(0x007B55);
         set1.setDrawFilled(true);
-        set1.setFillAlpha(180);
+//        set1.setFillAlpha(180);
         set1.setLineWidth(2f);
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
 
         RadarDataSet set2 = new RadarDataSet(entries2, "实际能耗");
-        set2.setColor(0xFF0000);
+        set2.setColor(0x80FF0000);
         set2.setFillColor(0xEB4F1B);
         set2.setDrawFilled(true);
-        set2.setFillAlpha(180);
+//        set2.setFillAlpha(180);
         set2.setLineWidth(2f);
         set2.setDrawHighlightCircleEnabled(true);
         set2.setDrawHighlightIndicators(false);
