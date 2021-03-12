@@ -236,7 +236,6 @@ public class RadarChartRenderer extends LineRadarRenderer {
         drawWeb(c);
     }
 
-
     protected Path mDrawWebBg = new Path();
 
     protected void drawWeb(Canvas c) {
@@ -276,6 +275,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
             c.drawLine(center.x, center.y, p.x, p.y, mWebPaint);
 
+            //绘制背景的路径
             if (!hasMovedToPoint) {
                 surface.moveTo(p.x, p.y);
                 hasMovedToPoint = true;
@@ -284,6 +284,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
             }
 
         }
+        //填充背景
         drawFilledPath(c, surface, Color.rgb(255, 189, 0), 180);
         surface.close();
         MPPointF.recycleInstance(p);
