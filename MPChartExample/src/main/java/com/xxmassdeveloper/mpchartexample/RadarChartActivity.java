@@ -7,7 +7,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+
 import androidx.core.content.ContextCompat;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -44,13 +46,13 @@ public class RadarChartActivity extends DemoBase {
         setTitle("RadarChartActivity");
 
         chart = findViewById(R.id.chart1);
-        chart.setBackgroundColor(Color.rgb(60, 65, 82));
+        chart.setBackgroundColor(Color.WHITE);
 
         chart.getDescription().setEnabled(false);
 
-        chart.setWebLineWidth(1f);
+        chart.setWebLineWidth(-1f);
         chart.setWebColor(Color.LTGRAY);
-        chart.setWebLineWidthInner(1f);
+        chart.setWebLineWidthInner(2f);
         chart.setWebColorInner(Color.LTGRAY);
         chart.setWebAlpha(100);
 
@@ -71,7 +73,8 @@ public class RadarChartActivity extends DemoBase {
         xAxis.setXOffset(0f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-            private final String[] mActivities = new String[]{"Burger", "Steak", "Salad", "Pasta", "Pizza"};
+            private final String[] mActivities = new String[]{"C30\nwrap\n1.05kw·h/m³", "C60\nwrap\n1.05kw·h/m³",
+                    "C50\nwrap\n1.05kw·h/m³", "C40\nwrap\n1.05kw·h/m³", "C25\nwrap\n1.05kw·h/m³", "C35\nwrap\n1.05kw·h/m³"};
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -82,6 +85,7 @@ public class RadarChartActivity extends DemoBase {
 
         YAxis yAxis = chart.getYAxis();
         yAxis.setTypeface(tfLight);
+        //
         yAxis.setLabelCount(5, false);
         yAxis.setTextSize(9f);
         yAxis.setAxisMinimum(0f);
@@ -96,14 +100,14 @@ public class RadarChartActivity extends DemoBase {
         l.setTypeface(tfLight);
         l.setXEntrySpace(7f);
         l.setYEntrySpace(5f);
-        l.setTextColor(Color.WHITE);
+        l.setTextColor(Color.BLACK);
     }
 
     private void setData() {
 
         float mul = 80;
         float min = 20;
-        int cnt = 5;
+        int cnt = 6;
 
         ArrayList<RadarEntry> entries1 = new ArrayList<>();
         ArrayList<RadarEntry> entries2 = new ArrayList<>();
@@ -119,8 +123,8 @@ public class RadarChartActivity extends DemoBase {
         }
 
         RadarDataSet set1 = new RadarDataSet(entries1, "Last Week");
-        set1.setColor(Color.rgb(103, 110, 129));
-        set1.setFillColor(Color.rgb(103, 110, 129));
+        set1.setColor(0x80007B55);
+        set1.setFillColor(0x007B55);
         set1.setDrawFilled(true);
         set1.setFillAlpha(180);
         set1.setLineWidth(2f);
@@ -128,8 +132,8 @@ public class RadarChartActivity extends DemoBase {
         set1.setDrawHighlightIndicators(false);
 
         RadarDataSet set2 = new RadarDataSet(entries2, "This Week");
-        set2.setColor(Color.rgb(121, 162, 175));
-        set2.setFillColor(Color.rgb(121, 162, 175));
+        set2.setColor(0xFF0000);
+        set2.setFillColor(0xEB4F1B);
         set2.setDrawFilled(true);
         set2.setFillAlpha(180);
         set2.setLineWidth(2f);
@@ -144,7 +148,7 @@ public class RadarChartActivity extends DemoBase {
         data.setValueTypeface(tfLight);
         data.setValueTextSize(8f);
         data.setDrawValues(false);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
 
         chart.setData(data);
         chart.invalidate();

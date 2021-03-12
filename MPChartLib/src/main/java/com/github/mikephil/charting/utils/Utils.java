@@ -137,6 +137,17 @@ public abstract class Utils {
     }
 
     /**
+     * @param value
+     * @return mmToPx
+     */
+    public static float mm2px(float value) {
+        if (mMetrics == null) {
+            return value;
+        }
+        return (value * mMetrics.density * (1.0f / 25.4f));
+    }
+
+    /**
      * calculates the approximate width of a text, depending on a demo text
      * avoid repeated calls (e.g. inside drawing methods)
      *

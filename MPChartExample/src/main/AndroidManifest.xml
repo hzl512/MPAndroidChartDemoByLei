@@ -11,7 +11,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.xxmassdeveloper.mpchartexample.notimportant.MainActivity"
+            android:name="RadarChartActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<!--        <activity-->
+<!--            android:name="com.xxmassdeveloper.mpchartexample.notimportant.MainActivity"-->
+<!--            android:label="@string/app_name" >-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
         <activity android:name="LineChartActivity1" />
         <activity android:name="LineChartActivity2" />
         <activity android:name="LineChartTime" />
@@ -40,7 +49,7 @@
         <activity android:name="InvertedLineChartActivity" />
         <activity android:name="CandleStickChartActivity" />
         <activity android:name="CubicLineChartActivity" />
-        <activity android:name="RadarChartActivity" />
+<!--        <activity android:name="RadarChartActivity" />-->
         <activity android:name="LineChartActivityColored" />
         <activity android:name="DynamicalAddingActivity" />
         <activity android:name="RealtimeLineChartActivity" />

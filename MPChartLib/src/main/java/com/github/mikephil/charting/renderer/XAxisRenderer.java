@@ -228,7 +228,32 @@ public class XAxisRenderer extends AxisRenderer {
     }
 
     protected void drawLabel(Canvas c, String formattedLabel, float x, float y, MPPointF anchor, float angleDegrees) {
-        Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
+        //如果有wrap的就做换行处理，没有就是默认的
+        if (formattedLabel.contains("\nwrap\n")) {
+            String[] labels = formattedLabel.split("\nwrap\n");
+            float labelHeight = mXAxis.getTextSize();
+            float labelInterval = 25f;
+
+            Paint mFirstLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mFirstLinePaint.setColor(Color.parseColor("#52525D"));
+            mFirstLinePaint.setTextAlign(Align.CENTER);
+            mFirstLinePaint.setTextSize(Utils.convertDpToPixel(17f));
+            mFirstLinePaint.setTypeface(mXAxis.getTypeface());
+
+            Paint mSecondLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            mSecondLinePaint.setColor(Color.parseColor("#7A7A7A"));
+            mSecondLinePaint.setTextAlign(Align.CENTER);
+            mSecondLinePaint.setTextSize(Utils.convertDpToPixel(17f));
+            mSecondLinePaint.setTypeface(mXAxis.getTypeface());
+            if (labels.length > 1) {
+                Utils.drawXAxisValue(c, labels[0], x, y, mFirstLinePaint, anchor, angleDegrees);
+                Utils.drawXAxisValue(c, labels[1], x, y + labelHeight + labelInterval, mSecondLinePaint, anchor, angleDegrees);
+            } else {
+                Utils.drawXAxisValue(c, formattedLabel, x, y, mFirstLinePaint, anchor, angleDegrees);
+            }
+        } else {
+            Utils.drawXAxisValue(c, formattedLabel, x, y, mAxisLabelPaint, anchor, angleDegrees);
+        }
     }
     protected Path mRenderGridLinesPath = new Path();
     protected float[] mRenderGridLinesBuffer = new float[2];
