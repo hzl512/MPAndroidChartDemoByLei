@@ -50,8 +50,11 @@ public class RadarChartActivity extends DemoBase {
 
         chart.getDescription().setEnabled(false);
 
-        chart.setWebLineWidth(-1f);
+//        chart.setSkipWebLineCount(5);
+
+        chart.setWebLineWidth(0.01f);
         chart.setWebColor(Color.LTGRAY);
+
         chart.setWebLineWidthInner(2f);
         chart.setWebColorInner(Color.LTGRAY);
         chart.setWebAlpha(100);
@@ -94,8 +97,8 @@ public class RadarChartActivity extends DemoBase {
 
         Legend l = chart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
         l.setDrawInside(false);
         l.setTypeface(tfLight);
         l.setXEntrySpace(7f);
@@ -122,7 +125,7 @@ public class RadarChartActivity extends DemoBase {
             entries2.add(new RadarEntry(val2));
         }
 
-        RadarDataSet set1 = new RadarDataSet(entries1, "Last Week");
+        RadarDataSet set1 = new RadarDataSet(entries1, "平均能耗");
         set1.setColor(0x80007B55);
         set1.setFillColor(0x007B55);
         set1.setDrawFilled(true);
@@ -131,7 +134,7 @@ public class RadarChartActivity extends DemoBase {
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
 
-        RadarDataSet set2 = new RadarDataSet(entries2, "This Week");
+        RadarDataSet set2 = new RadarDataSet(entries2, "实际能耗");
         set2.setColor(0xFF0000);
         set2.setFillColor(0xEB4F1B);
         set2.setDrawFilled(true);

@@ -292,6 +292,7 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     /**
      * If set to true, drawing the web is enabled, if set to false, drawing the
      * whole web is disabled. Default: true
+     * 如果设置为true，则启用绘制Web；如果设置为false，则将绘制Web。
      *
      * @param enabled
      */
@@ -302,6 +303,7 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     /**
      * Sets the number of web-lines that should be skipped on chart web before the
      * next one is drawn. This targets the lines that come from the center of the RadarChart.
+     * 设置在绘制下一个之前在图表Web上应跳过的Web线的数量。这瞄准了来自RadarChart中心的线。
      *
      * @param count if count = 1 -> 1 line is skipped in between
      */
