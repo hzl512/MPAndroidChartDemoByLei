@@ -76,11 +76,9 @@ public class RadarChartActivity extends DemoBase {
         xAxis.setXOffset(0f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-//            private final String[] mActivities = new String[]{"C30\nwrap\n1.05kw·h/m³", "C60\nwrap\n1.05kw·h/m³",
-//                    "C50\nwrap\n1.05kw·h/m³", "C40\nwrap\n1.05kw·h/m³", "C25\nwrap\n1.05kw·h/m³", "C35\nwrap\n1.05kw·h/m³"};
+            private final String[] mActivities = new String[]{"C30\nwrap\n1.05kw·h/m³", "C60\nwrap\n1.05kw·h/m³",
+                    "C50\nwrap\n1.05kw·h/m³", "C40\nwrap\n1.05kw·h/m³", "C25\nwrap\n1.05kw·h/m³", "C35\nwrap\n1.05kw·h/m³"};
 
-            private final String[] mActivities = new String[]{"衣服\nwrap\n100￥", "鞋子\nwrap\n500￥",
-                    "裤子\nwrap\n300￥", "袜子\nwrap\n20￥", "背包\nwrap\n100￥", "手电筒\nwrap\n90￥"};
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -126,7 +124,7 @@ public class RadarChartActivity extends DemoBase {
             entries2.add(new RadarEntry(val2));
         }
 
-        RadarDataSet set1 = new RadarDataSet(entries1, "价格");
+        RadarDataSet set1 = new RadarDataSet(entries1, "平均能耗");
         set1.setColor(0x80007B55);
         set1.setFillColor(0x007B55);
         set1.setDrawFilled(true);
@@ -135,7 +133,7 @@ public class RadarChartActivity extends DemoBase {
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
 
-        RadarDataSet set2 = new RadarDataSet(entries2, "商品");
+        RadarDataSet set2 = new RadarDataSet(entries2, "实际能耗");
         set2.setColor(0x80FF0000);
         set2.setFillColor(0xEB4F1B);
         set2.setDrawFilled(true);
