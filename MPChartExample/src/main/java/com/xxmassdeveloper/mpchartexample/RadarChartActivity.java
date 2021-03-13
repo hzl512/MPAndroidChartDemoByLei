@@ -49,19 +49,14 @@ public class RadarChartActivity extends DemoBase {
 
         chart = findViewById(R.id.chart1);
         chart.setBackgroundColor(Color.WHITE);
-
+        chart.setWebBackgroundColor(false, Color.rgb(255, 189, 0), 180);
         chart.getDescription().setEnabled(false);
-
-//        Paint p1 = chart.getRenderer().getPaintRender();
-//        p1.setColor(Color.BLUE);
-
-//        chart.setSkipWebLineCount(5);
 
         chart.setWebLineWidth(0.01f);
         chart.setWebColor(Color.LTGRAY);
 
         chart.setWebLineWidthInner(2f);
-        chart.setWebColorInner(Color.WHITE);
+        chart.setWebColorInner(Color.BLACK);
         chart.setWebAlpha(100);
 
         // create a custom MarkerView (extend MarkerView) and specify the layout

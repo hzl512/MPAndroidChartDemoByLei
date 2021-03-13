@@ -258,11 +258,10 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         Path surface = mDrawWebBg;
         surface.reset();
+        boolean hasMovedToPoint = false;
 
         final int xIncrements = 1 + mChart.getSkipWebLineCount();
         int maxEntryCount = mChart.getData().getMaxEntryCountSet().getEntryCount();
-
-        boolean hasMovedToPoint = false;
 
         MPPointF p = MPPointF.getInstance(0, 0);
         for (int i = 0; i < maxEntryCount; i += xIncrements) {
@@ -275,20 +274,23 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
             c.drawLine(center.x, center.y, p.x, p.y, mWebPaint);
 
-            //绘制背景的路径
-            if (!hasMovedToPoint) {
-                surface.moveTo(p.x, p.y);
-                hasMovedToPoint = true;
-            } else{
-                surface.lineTo(p.x, p.y);
+            if (mChart.isWebBackgroundOpen()) {
+                //绘制背景的路径
+                if (!hasMovedToPoint) {
+                    surface.moveTo(p.x, p.y);
+                    hasMovedToPoint = true;
+                } else {
+                    surface.lineTo(p.x, p.y);
+                }
             }
 
         }
-        //填充背景
-        drawFilledPath(c, surface, Color.rgb(255, 189, 0), 180);
-        surface.close();
+        if (mChart.isWebBackgroundOpen()) {
+            //填充背景
+            drawFilledPath(c, surface, mChart.getWebBackgroundColor(), mChart.getWebBackgroundFillAlpha());
+            surface.close();
+        }
         MPPointF.recycleInstance(p);
-
         // draw the inner-web
         mWebPaint.setStrokeWidth(mChart.getWebLineWidthInner());
         mWebPaint.setColor(mChart.getWebColorInner());

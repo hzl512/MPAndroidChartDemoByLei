@@ -25,6 +25,19 @@ import com.github.mikephil.charting.utils.Utils;
 public class RadarChart extends PieRadarChartBase<RadarData> {
 
     /**
+     * 蛛网背景色默认关闭设置
+     */
+    private boolean mWebBackgroundOpen = false;
+    /**
+     * 蛛网背景色，默认
+     */
+    private int mWebBackgroundColor = -1;
+    /**
+     * 不透明度 (0-255)
+     */
+    private int mWebBackgroundFillAlpha = 180;
+
+    /**
      * width of the main web lines
      */
     private float mWebLineWidth = 2.5f;
@@ -286,6 +299,30 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
      */
     public void setWebColorInner(int color) {
         mWebColorInner = color;
+    }
+
+    /**
+     * 设置蛛网背景色与透明度
+     *
+     * @param color
+     * @param fillAlpha
+     */
+    public void setWebBackgroundColor(boolean isOpen, int color, int fillAlpha) {
+        this.mWebBackgroundOpen = isOpen;
+        this.mWebBackgroundColor = color;
+        this.mWebBackgroundFillAlpha = fillAlpha;
+    }
+
+    public int getWebBackgroundColor() {
+        return mWebBackgroundColor;
+    }
+
+    public int getWebBackgroundFillAlpha() {
+        return mWebBackgroundFillAlpha;
+    }
+
+    public boolean isWebBackgroundOpen() {
+        return mWebBackgroundOpen;
     }
 
     public int getWebColorInner() {
