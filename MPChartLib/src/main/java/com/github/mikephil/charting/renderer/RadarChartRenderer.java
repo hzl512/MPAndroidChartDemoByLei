@@ -288,8 +288,8 @@ public class RadarChartRenderer extends LineRadarRenderer {
         if (mChart.isWebBackgroundOpen()) {
             //填充背景
             drawFilledPath(c, surface, mChart.getWebBackgroundColor(), mChart.getWebBackgroundFillAlpha());
-            surface.close();
         }
+        surface.close();
         MPPointF.recycleInstance(p);
         // draw the inner-web
         mWebPaint.setStrokeWidth(mChart.getWebLineWidthInner());
