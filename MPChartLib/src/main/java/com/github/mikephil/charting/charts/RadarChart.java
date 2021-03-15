@@ -27,7 +27,7 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
     /**
      * 蛛网背景色默认关闭设置
      */
-    private boolean mWebBackgroundOpen = false;
+    private boolean mWebBackgroundEnable = false;
     /**
      * 蛛网背景色，默认
      */
@@ -307,8 +307,8 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
      * @param color
      * @param fillAlpha
      */
-    public void setWebBackgroundColor(boolean isOpen, int color, int fillAlpha) {
-        this.mWebBackgroundOpen = isOpen;
+    public void setWebBackgroundColor(boolean enable, int color, int fillAlpha) {
+        this.mWebBackgroundEnable = enable;
         this.mWebBackgroundColor = color;
         this.mWebBackgroundFillAlpha = fillAlpha;
     }
@@ -321,8 +321,8 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
         return mWebBackgroundFillAlpha;
     }
 
-    public boolean isWebBackgroundOpen() {
-        return mWebBackgroundOpen;
+    public boolean isWebBackgroundEnable() {
+        return mWebBackgroundEnable;
     }
 
     public int getWebColorInner() {

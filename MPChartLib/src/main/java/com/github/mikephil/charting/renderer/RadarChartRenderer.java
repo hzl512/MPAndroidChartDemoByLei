@@ -274,7 +274,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
             c.drawLine(center.x, center.y, p.x, p.y, mWebPaint);
 
-            if (mChart.isWebBackgroundOpen()) {
+            if (mChart.isWebBackgroundEnable()) {
                 //绘制背景的路径
                 if (!hasMovedToPoint) {
                     surface.moveTo(p.x, p.y);
@@ -285,7 +285,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
             }
 
         }
-        if (mChart.isWebBackgroundOpen()) {
+        if (mChart.isWebBackgroundEnable()) {
             //填充背景
             drawFilledPath(c, surface, mChart.getWebBackgroundColor(), mChart.getWebBackgroundFillAlpha());
         }
