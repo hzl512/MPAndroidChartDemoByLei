@@ -139,7 +139,7 @@ public class RadarChartActivity extends DemoBase {
         set2.setDrawFilled(true);
 //        set2.setFillAlpha(180);
         set2.setLineWidth(2f);
-        set2.setDrawHighlightCircleEnabled(true);
+        set2.setDrawHighlightCircleEnabled(false);
         set2.setDrawHighlightIndicators(false);
 
         ArrayList<IRadarDataSet> sets = new ArrayList<>();

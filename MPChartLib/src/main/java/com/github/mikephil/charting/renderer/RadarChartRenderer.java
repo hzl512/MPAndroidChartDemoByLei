@@ -63,10 +63,15 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         int mostEntries = radarData.getMaxEntryCountSet().getEntryCount();
 
-        for (IRadarDataSet set : radarData.getDataSets()) {
-            if (set.isVisible()) {
-                drawDataSet(c, set, mostEntries);
-            }
+//        for (IRadarDataSet set : radarData.getDataSets()) {
+//            if (set.isVisible()) {
+//                drawDataSet(c, set, mostEntries);
+//            }
+//        }
+
+        for (int i = 0; i < radarData.getDataSets().size(); i++) {
+            IRadarDataSet set = radarData.getDataSets().get(i);
+            drawDataSet(c, set, mostEntries, i);
         }
     }
 
@@ -74,12 +79,13 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
     /**
      * Draws the RadarDataSet
+     * 绘制不规则能力图
      *
      * @param c
      * @param dataSet
      * @param mostEntries the entry count of the dataset with the most entries
      */
-    protected void drawDataSet(Canvas c, IRadarDataSet dataSet, int mostEntries) {
+    protected void drawDataSet(Canvas c, IRadarDataSet dataSet, int mostEntries, int index) {
 
         float phaseX = mAnimator.getPhaseX();
         float phaseY = mAnimator.getPhaseY();
@@ -114,8 +120,25 @@ public class RadarChartRenderer extends LineRadarRenderer {
             if (!hasMovedToPoint) {
                 surface.moveTo(pOut.x, pOut.y);
                 hasMovedToPoint = true;
-            } else
+            } else {
                 surface.lineTo(pOut.x, pOut.y);
+            }
+
+            if (index == 0) {
+                drawHighlightCircle(c, pOut, 0.0f,
+                        2f,
+                        Color.parseColor("#007B55"),
+                        Color.parseColor("#007B55"),
+                        3f);
+            } else {
+                drawHighlightCircle(c, pOut, 0.0f,
+                        5.0f,
+                        Color.parseColor("#EB4F1B"),
+                        Color.WHITE,
+                        1.0f);
+            }
+
+
         }
 
         if (dataSet.getEntryCount() > mostEntries) {
@@ -126,7 +149,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
         surface.close();
 
         if (dataSet.isDrawFilledEnabled()) {
-
+            //设置能力填充颜色
             final Drawable drawable = dataSet.getFillDrawable();
             if (drawable != null) {
                 drawFilledPath(c, surface, drawable);
@@ -273,6 +296,12 @@ public class RadarChartRenderer extends LineRadarRenderer {
                     p);
 
             c.drawLine(center.x, center.y, p.x, p.y, mWebPaint);
+
+//            drawHighlightCircle(c,p,3.0f,
+//                    4.0f,
+//                    Color.BLACK,
+//                    Color.BLACK,
+//                    2.0f);
 
             if (mChart.isWebBackgroundEnable()) {
                 //绘制背景的路径

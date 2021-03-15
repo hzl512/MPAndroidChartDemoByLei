@@ -130,7 +130,7 @@ public abstract class DataRenderer extends Renderer {
 
     /**
      * Loops over all Entrys and draws their values.
-     *
+     * 循环所有条目并绘制其值。
      * @param c
      */
     public abstract void drawValues(Canvas c);
