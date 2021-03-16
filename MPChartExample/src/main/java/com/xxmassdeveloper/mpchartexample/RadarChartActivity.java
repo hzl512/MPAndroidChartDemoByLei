@@ -59,6 +59,27 @@ public class RadarChartActivity extends DemoBase {
         chart.setWebColorInner(Color.WHITE);
         chart.setWebAlpha(100);
 
+
+        RadarDataSet set1 = new RadarDataSet(null, "");
+        set1.setHighlightCircleInnerRadius(0f);
+        set1.setHighlightCircleOuterRadius(2f);
+        set1.setHighlightCircleFillColor(Color.parseColor("#007B55"));
+        set1.setHighlightCircleStrokeColor(Color.parseColor("#007B55"));
+        set1.setHighlightCircleStrokeWidth(3f);
+
+        RadarDataSet set2 = new RadarDataSet(null, "");
+        set2.setHighlightCircleInnerRadius(0f);
+        set2.setHighlightCircleOuterRadius(5f);
+        set2.setHighlightCircleFillColor(Color.parseColor("#EB4F1B"));
+        set2.setHighlightCircleStrokeColor(Color.WHITE);
+        set2.setHighlightCircleStrokeWidth(1f);
+
+        ArrayList<RadarDataSet> sets = new ArrayList<>();
+        sets.add(set1);
+        sets.add(set2);
+
+        chart.setWebDrawCircleDotEnable(true, sets);
+
         // create a custom MarkerView (extend MarkerView) and specify the layout
         // to use for it
         MarkerView mv = new RadarMarkerView(this, R.layout.radar_markerview);

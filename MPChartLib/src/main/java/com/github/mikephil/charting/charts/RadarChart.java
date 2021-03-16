@@ -10,11 +10,15 @@ import android.util.AttributeSet;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.components.YAxis.AxisDependency;
 import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.highlight.RadarHighlighter;
+import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
 import com.github.mikephil.charting.renderer.RadarChartRenderer;
 import com.github.mikephil.charting.renderer.XAxisRendererRadarChart;
 import com.github.mikephil.charting.renderer.YAxisRendererRadarChart;
 import com.github.mikephil.charting.utils.Utils;
+
+import java.util.ArrayList;
 
 /**
  * Implementation of the RadarChart, a "spidernet"-like chart. It works best
@@ -25,7 +29,13 @@ import com.github.mikephil.charting.utils.Utils;
 public class RadarChart extends PieRadarChartBase<RadarData> {
 
     /**
-     * 蛛网背景色默认关闭设置
+     * 是否绘制蛛网能力图边角原点，默认关闭设置
+     */
+    private boolean mWebDrawCircleDotEnable = false;
+    private ArrayList<RadarDataSet> mWebDrawCircleDotList = new ArrayList<>();
+
+    /**
+     * 是否绘制蛛网背景色，默认关闭设置
      */
     private boolean mWebBackgroundEnable = false;
     /**
@@ -301,6 +311,7 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
         mWebColorInner = color;
     }
 
+
     /**
      * 设置蛛网背景色与透明度
      *
@@ -327,6 +338,24 @@ public class RadarChart extends PieRadarChartBase<RadarData> {
 
     public int getWebColorInner() {
         return mWebColorInner;
+    }
+
+    /**
+     * 设置蛛网能力图的折角圆点背景色等
+     * @param mWebDrawCircleDotEnable
+     * @param dataSets
+     */
+    public void setWebDrawCircleDotEnable(boolean mWebDrawCircleDotEnable, ArrayList<RadarDataSet> dataSets) {
+        this.mWebDrawCircleDotEnable = mWebDrawCircleDotEnable;
+        this.mWebDrawCircleDotList = dataSets;
+    }
+
+    public ArrayList<RadarDataSet> getWebDrawCircleDotList() {
+        return mWebDrawCircleDotList;
+    }
+
+    public boolean isWebDrawCircleDotEnable() {
+        return mWebDrawCircleDotEnable;
     }
 
     /**

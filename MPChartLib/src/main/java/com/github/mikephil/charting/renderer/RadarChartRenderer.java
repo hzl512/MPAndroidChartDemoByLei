@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
@@ -124,20 +125,16 @@ public class RadarChartRenderer extends LineRadarRenderer {
                 surface.lineTo(pOut.x, pOut.y);
             }
 
-            if (index == 0) {
-                drawHighlightCircle(c, pOut, 0.0f,
-                        2f,
-                        Color.parseColor("#007B55"),
-                        Color.parseColor("#007B55"),
-                        3f);
-            } else {
-                drawHighlightCircle(c, pOut, 0.0f,
-                        5.0f,
-                        Color.parseColor("#EB4F1B"),
-                        Color.WHITE,
-                        1.0f);
+            if (mChart.isWebDrawCircleDotEnable() && mChart.getData().getDataSets().size()
+                    == mChart.getWebDrawCircleDotList().size()) {
+                //弃用绘制折线圆点且数目一致
+                RadarDataSet radarDataSet = mChart.getWebDrawCircleDotList().get(index);
+                drawHighlightCircle(c, pOut, radarDataSet.getHighlightCircleInnerRadius(),
+                        radarDataSet.getHighlightCircleOuterRadius(),
+                        radarDataSet.getHighlightCircleFillColor(),
+                        radarDataSet.getHighlightCircleStrokeColor(),
+                        radarDataSet.getHighlightCircleStrokeWidth());
             }
-
 
         }
 
