@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import com.github.mikephil.charting.animation.ChartAnimator;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
@@ -63,10 +64,15 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
         int mostEntries = radarData.getMaxEntryCountSet().getEntryCount();
 
-        for (IRadarDataSet set : radarData.getDataSets()) {
-            if (set.isVisible()) {
-                drawDataSet(c, set, mostEntries);
-            }
+//        for (IRadarDataSet set : radarData.getDataSets()) {
+//            if (set.isVisible()) {
+//                drawDataSet(c, set, mostEntries);
+//            }
+//        }
+
+        for (int i = 0; i < radarData.getDataSets().size(); i++) {
+            IRadarDataSet set = radarData.getDataSets().get(i);
+            drawDataSet(c, set, mostEntries, i);
         }
     }
 
@@ -74,12 +80,13 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
     /**
      * Draws the RadarDataSet
+     * 绘制不规则能力图
      *
      * @param c
      * @param dataSet
      * @param mostEntries the entry count of the dataset with the most entries
      */
-    protected void drawDataSet(Canvas c, IRadarDataSet dataSet, int mostEntries) {
+    protected void drawDataSet(Canvas c, IRadarDataSet dataSet, int mostEntries, int index) {
 
         float phaseX = mAnimator.getPhaseX();
         float phaseY = mAnimator.getPhaseY();
@@ -114,8 +121,21 @@ public class RadarChartRenderer extends LineRadarRenderer {
             if (!hasMovedToPoint) {
                 surface.moveTo(pOut.x, pOut.y);
                 hasMovedToPoint = true;
-            } else
+            } else {
                 surface.lineTo(pOut.x, pOut.y);
+            }
+
+            if (mChart.isWebDrawCircleDotEnable() && mChart.getData().getDataSets().size()
+                    == mChart.getWebDrawCircleDotList().size()) {
+                //弃用绘制折线圆点且数目一致
+                RadarDataSet radarDataSet = mChart.getWebDrawCircleDotList().get(index);
+                drawHighlightCircle(c, pOut, radarDataSet.getHighlightCircleInnerRadius(),
+                        radarDataSet.getHighlightCircleOuterRadius(),
+                        radarDataSet.getHighlightCircleFillColor(),
+                        radarDataSet.getHighlightCircleStrokeColor(),
+                        radarDataSet.getHighlightCircleStrokeWidth());
+            }
+
         }
 
         if (dataSet.getEntryCount() > mostEntries) {
@@ -126,7 +146,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
         surface.close();
 
         if (dataSet.isDrawFilledEnabled()) {
-
+            //设置能力填充颜色
             final Drawable drawable = dataSet.getFillDrawable();
             if (drawable != null) {
                 drawFilledPath(c, surface, drawable);
@@ -274,7 +294,13 @@ public class RadarChartRenderer extends LineRadarRenderer {
 
             c.drawLine(center.x, center.y, p.x, p.y, mWebPaint);
 
-            if (mChart.isWebBackgroundOpen()) {
+//            drawHighlightCircle(c,p,3.0f,
+//                    4.0f,
+//                    Color.BLACK,
+//                    Color.BLACK,
+//                    2.0f);
+
+            if (mChart.isWebBackgroundEnable()) {
                 //绘制背景的路径
                 if (!hasMovedToPoint) {
                     surface.moveTo(p.x, p.y);
@@ -285,7 +311,7 @@ public class RadarChartRenderer extends LineRadarRenderer {
             }
 
         }
-        if (mChart.isWebBackgroundOpen()) {
+        if (mChart.isWebBackgroundEnable()) {
             //填充背景
             drawFilledPath(c, surface, mChart.getWebBackgroundColor(), mChart.getWebBackgroundFillAlpha());
         }

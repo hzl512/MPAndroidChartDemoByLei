@@ -59,6 +59,27 @@ public class RadarChartActivity extends DemoBase {
         chart.setWebColorInner(Color.WHITE);
         chart.setWebAlpha(100);
 
+
+        RadarDataSet set1 = new RadarDataSet(null, "");
+        set1.setHighlightCircleInnerRadius(0f);
+        set1.setHighlightCircleOuterRadius(2f);
+        set1.setHighlightCircleFillColor(Color.parseColor("#007B55"));
+        set1.setHighlightCircleStrokeColor(Color.parseColor("#007B55"));
+        set1.setHighlightCircleStrokeWidth(3f);
+
+        RadarDataSet set2 = new RadarDataSet(null, "");
+        set2.setHighlightCircleInnerRadius(0f);
+        set2.setHighlightCircleOuterRadius(5f);
+        set2.setHighlightCircleFillColor(Color.parseColor("#EB4F1B"));
+        set2.setHighlightCircleStrokeColor(Color.WHITE);
+        set2.setHighlightCircleStrokeWidth(1f);
+
+        ArrayList<RadarDataSet> sets = new ArrayList<>();
+        sets.add(set1);
+        sets.add(set2);
+
+        chart.setWebDrawCircleDotEnable(true, sets);
+
         // create a custom MarkerView (extend MarkerView) and specify the layout
         // to use for it
         MarkerView mv = new RadarMarkerView(this, R.layout.radar_markerview);
@@ -76,11 +97,9 @@ public class RadarChartActivity extends DemoBase {
         xAxis.setXOffset(0f);
         xAxis.setValueFormatter(new IAxisValueFormatter() {
 
-//            private final String[] mActivities = new String[]{"C30\nwrap\n1.05kw·h/m³", "C60\nwrap\n1.05kw·h/m³",
-//                    "C50\nwrap\n1.05kw·h/m³", "C40\nwrap\n1.05kw·h/m³", "C25\nwrap\n1.05kw·h/m³", "C35\nwrap\n1.05kw·h/m³"};
+            private final String[] mActivities = new String[]{"C30\nwrap\n1.05kw·h/m³", "C60\nwrap\n1.05kw·h/m³",
+                    "C50\nwrap\n1.05kw·h/m³", "C40\nwrap\n1.05kw·h/m³", "C25\nwrap\n1.05kw·h/m³", "C35\nwrap\n1.05kw·h/m³"};
 
-            private final String[] mActivities = new String[]{"衣服\nwrap\n100￥", "鞋子\nwrap\n500￥",
-                    "裤子\nwrap\n300￥", "袜子\nwrap\n20￥", "背包\nwrap\n100￥", "手电筒\nwrap\n90￥"};
 
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
@@ -126,7 +145,7 @@ public class RadarChartActivity extends DemoBase {
             entries2.add(new RadarEntry(val2));
         }
 
-        RadarDataSet set1 = new RadarDataSet(entries1, "价格");
+        RadarDataSet set1 = new RadarDataSet(entries1, "平均能耗");
         set1.setColor(0x80007B55);
         set1.setFillColor(0x007B55);
         set1.setDrawFilled(true);
@@ -135,13 +154,13 @@ public class RadarChartActivity extends DemoBase {
         set1.setDrawHighlightCircleEnabled(true);
         set1.setDrawHighlightIndicators(false);
 
-        RadarDataSet set2 = new RadarDataSet(entries2, "商品");
+        RadarDataSet set2 = new RadarDataSet(entries2, "实际能耗");
         set2.setColor(0x80FF0000);
         set2.setFillColor(0xEB4F1B);
         set2.setDrawFilled(true);
 //        set2.setFillAlpha(180);
         set2.setLineWidth(2f);
-        set2.setDrawHighlightCircleEnabled(true);
+        set2.setDrawHighlightCircleEnabled(false);
         set2.setDrawHighlightIndicators(false);
 
         ArrayList<IRadarDataSet> sets = new ArrayList<>();
